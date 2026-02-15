@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cookie cookie cookie </title>
+    
+    <!-- CSS2 -->
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: url('background2.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: "Trebuchet MS", Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .tumblr-container {
+            width: 900px;
+            max-width: 95%;
+            background: white;
+            border: 3px solid #ffc0cb;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .browser-bar {
+            background: linear-gradient(to bottom, #ffd6e0, #ffc0cb);
+            padding: 10px 15px;
+            border-radius: 7px 7px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #ffb3c1;
+        }
+
+        .browser-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .browser-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid #ff9eb5;
+        }
+
+        .browser-button.close { background: #ff6b9d; }
+        .browser-button.minimize { background: #ffa8c5; }
+        .browser-button.maximize { background: #ffc0db; }
+
+        .url-bar {
+            flex: 1;
+            background: white;
+            border: 2px solid #ffb3c1;
+            border-radius: 15px;
+            padding: 5px 15px;
+            font-size: 12px;
+            color: #ff69b4;
+        }
+
+        .nav-tabs {
+            background: #fff0f5;
+            padding: 8px 15px;
+            display: flex;
+            gap: 15px;
+            border-bottom: 2px solid #ffc0cb;
+            font-size: 13px;
+        }
+
+        .nav-tab {
+            cursor: pointer;
+            padding: 5px 10px;
+            color: #ff69b4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-tab:hover {
+            background: #ffe0eb;
+            border-radius: 5px;
+        }
+
+        .main-content {
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .sidebar {
+            width: 200px;
+            flex-shrink: 0;
+        }
+
+        .search-box {
+            background: #fff0f5;
+            border: 2px solid #ffc0cb;
+            border-radius: 5px;
+            padding: 8px;
+            margin-bottom: 15px;
+        }
+
+        .search-box input {
+            width: 100%;
+            border: 1px solid #ffc0cb;
+            border-radius: 3px;
+            padding: 5px;
+            font-size: 12px;
+        }
+
+        .user-gallery {
+            background: #fff0f5;
+            border: 2px solid #ffc0cb;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .user-gallery h4 {
+            margin: 0 0 10px 0;
+            color: #ff69b4;
+            font-size: 13px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .gallery-item {
+            width: 100%;
+            height: 80px;
+            background: ffe0eb;
+            border: 2px solid #ffc0cb;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .content-area {
+            flex: 1;
+        }
+
+        .profile-header {
+            background: #fff0f5;
+            border: 2px solid #ffc0cb;
+            border-radius: 5px;
+            padding: 15px;
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .profile-pic {
+            width: 80px;
+            height: 80px;
+            border: 3px solid #ffc0cb;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .profile-info h2 {
+            margin: 0 0 5px 0;
+            color: #ff69b4;
+            font-size: 18px;
+        }
+
+        .profile-info p {
+            margin: 3px 0;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .content-box {
+            background: white;
+            border: 2px solid #ffc0cb;
+            border-radius: 5px;
+            padding: 15px;
+        }
+
+        .content-box h3 {
+            margin: 0 0 10px 0;
+            color: #ff69b4;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .right-sidebar {
+            width: 200px;
+            flex-shrink: 0;
+        }
+
+        .stats {
+            background: #fff0f5;
+            border: 2px solid #ffc0cb;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .links-box {
+            background: #fff0f5;
+            border: 2px solid #ffc0cb;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .links-box h4 {
+            margin: 0 0 10px 0;
+            color: #ff69b4;
+            font-size: 13px;
+        }
+
+        .link-item {
+            padding: 5px 0;
+            font-size: 12px;
+        }
+
+        .link-item a {
+            color: #ff69b4;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .link-item a:hover {
+            text-decoration: underline;
+        }
+
+        .about-text {
+            color: #666;
+            line-height: 1.6;
+            font-size: 13px;
+        }
+
+        .bio-item {
+            margin: 5px 0;
+            font-size: 13px;
+            color: #666;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+
+    <!-- CSS2 -->
+    
+</head>
+
+<!-- HTML2 -->
+
+<body>
+    <div class="tumblr-container">
+        <!-- Browser Bar -->
+        <div class="browser-bar">
+            <div class="browser-buttons">
+                <div class="browser-button close"></div>
+                <div class="browser-button minimize"></div>
+                <div class="browser-button maximize"></div>
+            </div>
+            <div class="url-bar">meow | https://www.cookiesworld.com/</div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <a class="nav-tab" onclick="showSection('home')">home</a>
+            <a class="nav-tab" onclick="playMusic()">play music</a>
+            <a class="nav-tab" onclick="showSection('movies')">movies</a>
+            <div style="margin-left: auto; display: flex; gap: 15px;">
+                <span style="color: #999; font-size: 12px;">my account</span>
+                <span style="color: #999; font-size: 12px;">sign out</span>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Sidebar -->
+            <div class="sidebar">
+                <div class="search-box">
+                    <strong style="font-size: 13px; color: #ff69b4;">search</strong>
+                    <input type="text" placeholder="cookie...">
+                </div>
+
+                <div class="user-gallery">
+                    <h4>🌸 gallery 🌸</h4>
+                    <div class="gallery-grid">
+                        <img src="g1.gif" class="gallery-item" alt="Gallery 1">
+                        <img src="g2.gif" class="gallery-item" alt="Gallery 2">
+                        <img src="g4.gif" class="gallery-item" alt="Gallery 3">
+                        <img src="g3.gif" class="gallery-item" alt="Gallery 4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center Content -->
+            <div class="content-area">
+                <!-- Profile Header -->
+                <div class="profile-header">
+                    <img src="cookie.png" class="profile-pic" alt="Cookie">
+                    <div class="profile-info">
+                        <h2>𑣲⋆🍓𐙚₊˚🎀⊹🤍 babybop ⋆🧸𐙚₊˚🌸⊹🩷𝜗ৎ</h2>
+                        <p>Last online: 5 mins ago</p>
+                    </div>
+                </div>
+
+                <!-- Content Box -->
+                <div class="content-box">
+                    <!-- Home Section -->
+                    <div id="home" class="section active">
+                        <h3>♡ account info ♡</h3>
+                        <div style="border: 2px dashed #ffc0cb; padding: 15px; margin-top: 10px;">
+                            <p style="margin: 0 0 10px 0; font-style: italic; color: #ff69b4;">about me</p>
+                            <div class="bio-item">🌸 cookie 🍪</div>
+                            <div class="bio-item">💗 baker 🍰</div>
+                            <div class="bio-item">🌸 gamer 🎮</div>
+                            <div class="bio-item">💗 wife 💍</div>
+                            
+                            <p style="margin: 15px 0 5px 0; font-style: italic; color: #ff69b4;">bio</p>
+                            <div class="about-text">
+                                heyyy hiii hello !!! im cookie ! nice 2 meet u !! i love video games nad my boyfriend ᥫ᭡
+                            </div>
+                        </div>
+                    </div>
+
+              <!-- Movies Section -->
+<div id="movies" class="section">
+    <h3>♡ MOVIES ♡</h3>
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin-top: 10px;">
+        <iframe 
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 5px;" 
+            src="https://www.youtube.com/embed/fBBcYr6X2Fk" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
+
+		<!-- Books Section -->
+                    <div id="books" class="section">
+                        <div style="padding: 15px;">
+                           
+                            <p><a href="https://www.amazon.com/g/AJS6Z8X7WRB49G?ref=gcui_gcf_rev_dir&ref_=pe_120899690_1025545470_TC_03_01_BT_03" target="_blank">buy more ...pls (ᵕ—ᴗ—)</a></p>
+                          
+                        </div>
+                    </div>
+
+                    <!-- Diana Section -->
+                    <div id="diana" class="section">
+                        <h3>♡ 4 more diana... ♡</h3>
+                        <div style="padding: 15px;">
+                            <p> SKINZ !!! ꉂ(˵˃ ᗜ ˂˵)</p>
+                            <p> RA-5WYV886UHPQ7HNMT </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="right-sidebar">
+                <div class="stats">
+                    (✿◠‿◠) 60 | (♡) 92 | (✉) 11
+                </div>
+
+                <div class="links-box">
+    <div class="link-item">• <a href="https://www.doordash.com/gc-share/47f9b#eyJwaW4iOiJEMlg0RTVGUkw0TVREQkxCIn0="_blank">yummy</a></div>
+    <div class="link-item">• <a onclick="showSection('books')">books</a></div>
+    <div class="link-item">• <a onclick="showSection('diana')">4 more Diana...</a></div>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="anything.mp3" type="audio/mpeg">
+    </audio>
+
+<!-- HTML2 -->
+
+<!-- JSS3 -->
+
+<script>
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => section.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+    }
+
+    function playMusic() {
+        const music = document.getElementById('bgMusic');
+        if (music.paused) {
+            music.play();
+        } else {
+            music.pause();
+        }
+    }
+</script>
+
+<!-- JSS2 -->
+
+</body>
+</html>
